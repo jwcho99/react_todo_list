@@ -8,16 +8,21 @@ interface TodoItemProps {
     onStatusChange: (todo: Todo) => void
 }
 
-const TodoItem: React.FC<TodoItemProps> = ({
+export default function TodoItem({
     todo,
     onEdit,
     onDelete,
     onStatusChange,
-}) => {
+}: TodoItemProps) {
     const statusColors = {
         'in progress': 'bg-yellow-200',
         blocked: 'bg-red-200',
         completed: 'bg-green-200',
+    }
+
+    const formatDate = (date: Date | null) => {
+        if (!date) return 'No due date'
+        return new Date(date).toLocaleDateString()
     }
 
     return (
@@ -26,7 +31,12 @@ const TodoItem: React.FC<TodoItemProps> = ({
                 statusColors[todo.status]
             }`}
         >
-            <span>{todo.text}</span>
+            <div>
+                <span>{todo.text}</span>
+                <p className='text-sm text-gray-500'>
+                    Due: {formatDate(todo.dueDate)}
+                </p>
+            </div>
             <div>
                 <select
                     value={todo.status}
@@ -58,5 +68,3 @@ const TodoItem: React.FC<TodoItemProps> = ({
         </li>
     )
 }
-
-export default TodoItem

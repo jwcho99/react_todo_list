@@ -4,22 +4,27 @@ import { Todo } from './todoApp'
 interface TodoModalProps {
     todo: Todo | null
     onClose: () => void
-    onSave: (text: string) => void
+    onSave: (text: string, dueDate: Date | null) => void
 }
 
 const TodoModal: React.FC<TodoModalProps> = ({ todo, onClose, onSave }) => {
     const [text, setText] = useState('')
+    const [dueDate, setDueDate] = useState<string>('')
 
     useEffect(() => {
         if (todo) {
             setText(todo.text)
+            setDueDate(
+                todo.dueDate ? todo.dueDate.toISOString().split('T')[0] : ''
+            )
         }
     }, [todo])
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
-        onSave(text)
+        onSave(text, dueDate ? new Date(dueDate) : null)
         setText('')
+        setDueDate('')
     }
 
     return (
@@ -38,8 +43,14 @@ const TodoModal: React.FC<TodoModalProps> = ({ todo, onClose, onSave }) => {
                             value={text}
                             onChange={(e) => setText(e.target.value)}
                             placeholder='Enter todo text'
-                            className='w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none'
+                            className='w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none mb-4'
                             autoFocus
+                        />
+                        <input
+                            type='date'
+                            value={dueDate}
+                            onChange={(e) => setDueDate(e.target.value)}
+                            className='w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none mb-4'
                         />
                         <div className='items-center px-4 py-3'>
                             <button

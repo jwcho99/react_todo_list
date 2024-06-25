@@ -6,6 +6,7 @@ export interface Todo {
     id: number
     text: string
     status: 'in progress' | 'blocked' | 'completed'
+    dueDate: Date | null
 }
 
 const TodoApp: React.FC = () => {
@@ -13,11 +14,12 @@ const TodoApp: React.FC = () => {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [editingTodo, setEditingTodo] = useState<Todo | null>(null)
 
-    const addTodo = (text: string) => {
+    const addTodo = (text: string, dueDate: Date | null) => {
         const newTodo: Todo = {
             id: Date.now(),
             text,
             status: 'in progress',
+            dueDate,
         }
         setTodos([...todos, newTodo])
     }
@@ -63,11 +65,11 @@ const TodoApp: React.FC = () => {
                 <TodoModal
                     todo={editingTodo}
                     onClose={closeModal}
-                    onSave={(text) => {
+                    onSave={(text, dueDate) => {
                         if (editingTodo) {
-                            updateTodo({ ...editingTodo, text })
+                            updateTodo({ ...editingTodo, text, dueDate })
                         } else {
-                            addTodo(text)
+                            addTodo(text, dueDate)
                         }
                         closeModal()
                     }}
