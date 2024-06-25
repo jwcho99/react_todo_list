@@ -9,13 +9,6 @@ export interface Todo {
     dueDate: Date | null
 }
 
-export interface Todo {
-    id: number
-    text: string
-    status: 'in progress' | 'blocked' | 'completed'
-    dueDate: Date | null
-}
-
 export default function TodoApp() {
     const [todos, setTodos] = useState<Todo[]>([])
     const [isModalOpen, setIsModalOpen] = useState(false)
