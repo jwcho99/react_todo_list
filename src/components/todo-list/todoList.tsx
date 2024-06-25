@@ -9,14 +9,14 @@ interface TodoListProps {
     onStatusChange: (todo: Todo) => void
 }
 
-const TodoList: React.FC<TodoListProps> = ({
+export default function TodoList({
     todos,
     onEdit,
     onDelete,
     onStatusChange,
-}) => {
+}: TodoListProps) {
     return (
-        <ul className='space-y-2'>
+        <>
             {todos.map((todo) => (
                 <TodoItem
                     key={todo.id}
@@ -26,8 +26,6 @@ const TodoList: React.FC<TodoListProps> = ({
                     onStatusChange={onStatusChange}
                 />
             ))}
-        </ul>
+        </>
     )
 }
-
-export default TodoList

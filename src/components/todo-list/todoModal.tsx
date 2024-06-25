@@ -7,7 +7,7 @@ interface TodoModalProps {
     onSave: (text: string, dueDate: Date | null) => void
 }
 
-const TodoModal: React.FC<TodoModalProps> = ({ todo, onClose, onSave }) => {
+export default function TodoModal({ todo, onClose, onSave }: TodoModalProps) {
     const [text, setText] = useState('')
     const [dueDate, setDueDate] = useState<string>('')
 
@@ -76,5 +76,3 @@ const TodoModal: React.FC<TodoModalProps> = ({ todo, onClose, onSave }) => {
         </div>
     )
 }
-
-export default TodoModal

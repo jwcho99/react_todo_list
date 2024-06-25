@@ -9,7 +9,14 @@ export interface Todo {
     dueDate: Date | null
 }
 
-const TodoApp: React.FC = () => {
+export interface Todo {
+    id: number
+    text: string
+    status: 'in progress' | 'blocked' | 'completed'
+    dueDate: Date | null
+}
+
+export default function TodoApp() {
     const [todos, setTodos] = useState<Todo[]>([])
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [editingTodo, setEditingTodo] = useState<Todo | null>(null)
@@ -78,5 +85,3 @@ const TodoApp: React.FC = () => {
         </div>
     )
 }
-
-export default TodoApp
