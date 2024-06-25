@@ -16,7 +16,7 @@ export default function TodoList({
     onStatusChange,
 }: TodoListProps) {
     return (
-        <>
+        <div>
             {todos.map((todo) => (
                 <TodoItem
                     key={todo.id}
@@ -26,6 +26,6 @@ export default function TodoList({
                     onStatusChange={onStatusChange}
                 />
             ))}
-        </>
+        </div>
     )
 }

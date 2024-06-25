@@ -21,8 +21,10 @@ export default function TodoItem({
     }
 
     const formatDate = (date: Date | null) => {
-        if (!date) return 'No due date'
-        return new Date(date).toLocaleDateString()
+        const actual_date = date || new Date()
+        return actual_date.toLocaleDateString()
+        /* if (!date) return 'No due date'
+        return new Date(date).toLocaleDateString() */
     }
 
     return (
